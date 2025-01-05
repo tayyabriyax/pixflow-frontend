@@ -1,13 +1,32 @@
-import React from "react"
-import SignIn from "./components/SignIn"
+import React from 'react';
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route
+} from 'react-router-dom';
+import {
+  Home,
+  Profile,
+  Settings,
+  SignIn,
+  SignUp
+} from './pages';
+import Layout from './Layout';
 
-function App() {
-
+const App = () => {
   return (
-    <>
-      <SignIn/>
-    </>
-  )
-}
+    <Router>
+      <Layout>
+        <Routes>
+          <Route path="/" element={<SignIn />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/home" element={<Home />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/settings" element={<Settings />} />
+        </Routes>
+      </Layout>
+    </Router>
+  );
+};
 
-export default App
+export default App;
