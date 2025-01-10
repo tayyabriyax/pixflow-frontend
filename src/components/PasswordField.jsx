@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
-const PasswordField = ({ label, placeholder, id }) => {
+const PasswordField = ({ label, placeholder, name, value, onChange }) => {
     const [passwordVisible, setPasswordVisible] = useState(false);
 
     const togglePasswordVisibility = () => {
@@ -14,8 +14,11 @@ const PasswordField = ({ label, placeholder, id }) => {
             <div className="relative">
                 <input
                     type={passwordVisible ? 'text' : 'password'}
-                    id={id}
+                    id={name}
+                    name={name}
                     autoComplete="off"
+                    value={value}
+                    onChange={onChange}
                     className="w-full px-4 py-2 text-sm border rounded-lg focus:outline-none focus:ring-2 
                         focus:ring-purple-400"
                     placeholder={placeholder}

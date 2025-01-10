@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
     InputField,
     PasswordField,
@@ -7,6 +7,17 @@ import {
 import { Link } from 'react-router-dom';
 
 const SignIn = () => {
+
+    const [loginCredentials, setLoginCredentials] = useState({ userName: "", password: "" });
+
+    const handleChangeCredentials = (e) => {
+        setLoginCredentials({
+            ...loginCredentials,
+            [e.target.name]: e.target.value
+        });
+    };
+
+    console.log(loginCredentials);
 
     return (
         <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-blue-100 
@@ -19,10 +30,15 @@ const SignIn = () => {
                         label={"Username"}
                         name={"userName"}
                         type={"text"}
+                        value={loginCredentials.userName}
+                        onChange={handleChangeCredentials}
                         placeholder={"Enter your username"} />
 
                     <PasswordField
+                        name={"password"}
                         label={"Password"}
+                        value={loginCredentials.password}
+                        onChange={handleChangeCredentials}
                         placeholder={"Enter your password"} />
 
                     <div className="mb-4 flex items-center justify-between">
