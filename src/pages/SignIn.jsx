@@ -5,6 +5,8 @@ import {
     PrimaryButton
 } from '../components';
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { loginAsync } from '../store/authSlice';
 
 const SignIn = () => {
 
@@ -17,7 +19,17 @@ const SignIn = () => {
         });
     };
 
-    console.log(loginCredentials);
+    const dispatch = useDispatch();
+
+    const login = async (e) => {
+        e.preventDefault();
+        dispatch(loginAsync(loginCredentials));
+        setLoginCredentials({
+            ...loginCredentials,
+            userName: "",
+            password: ""
+        });
+    };
 
     return (
         <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-blue-100 
@@ -49,6 +61,7 @@ const SignIn = () => {
                     </div>
 
                     <PrimaryButton
+                        onClick={login}
                         label={"Sign In"} />
 
                     <div className="mt-4 text-center text-sm text-gray-600">

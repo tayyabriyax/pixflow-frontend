@@ -1,9 +1,10 @@
 import React from 'react'
-import { useLocation } from 'react-router-dom';
+import { Navigate, useLocation } from 'react-router-dom';
 import { Sidebar } from './components';
+import { useSelector } from 'react-redux';
 
 const Layout = ({ children }) => {
-    
+
     const location = useLocation();
     const showSidebar = location.pathname !== '/' && location.pathname !== '/signup';
 
@@ -17,4 +18,9 @@ const Layout = ({ children }) => {
     );
 };
 
-export default Layout
+const PrivateRoute = ({ children }) => {
+    const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+    return isAuthenticated ? children : <Navigate to="/" />;
+};
+
+export { Layout, PrivateRoute }

@@ -11,7 +11,7 @@ import {
   SignIn,
   SignUp
 } from './pages';
-import Layout from './Layout';
+import { Layout, PrivateRoute } from './Layout';
 
 const App = () => {
   return (
@@ -20,7 +20,10 @@ const App = () => {
         <Routes>
           <Route path="/" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
-          <Route path="/home" element={<Home />} />
+          <Route path="/home" element={
+            <PrivateRoute>
+              <Home />
+            </PrivateRoute>} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/settings" element={<Settings />} />
         </Routes>
