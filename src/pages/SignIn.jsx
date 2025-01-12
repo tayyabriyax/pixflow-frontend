@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
     InputField,
     PasswordField,
     PrimaryButton
 } from '../components';
-import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import { loginAsync } from '../store/authSlice';
 
 const SignIn = () => {
@@ -20,6 +20,7 @@ const SignIn = () => {
     };
 
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const login = async (e) => {
         e.preventDefault();
@@ -30,6 +31,15 @@ const SignIn = () => {
             password: ""
         });
     };
+
+    const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+    const error = useSelector((state) => state.auth.error);
+
+    useEffect(() => {
+        if (isAuthenticated) {
+            navigate("/home");
+        }
+    }, [isAuthenticated])
 
     return (
         <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-blue-100 
@@ -53,8 +63,10 @@ const SignIn = () => {
                         onChange={handleChangeCredentials}
                         placeholder={"Enter your password"} />
 
-                    <div className="mb-4 flex items-center justify-between">
-                        <label className="flex items-center text-sm text-gray-700">
+                    <span className='text-red-500 text-xs'>{error}</span>
+
+                    <div className="mb-4 mt-2 flex items-center justify-between">
+                        <label className="flex text-sm text-gray-700">
                             <input type="checkbox" className="mr-2" /> Remember me
                         </label>
                         <a href="#" className="text-sm text-purple-500 hover:underline">Forgot Password?</a>

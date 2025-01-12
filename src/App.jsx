@@ -24,8 +24,12 @@ const App = () => {
             <PrivateRoute>
               <Home />
             </PrivateRoute>} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/settings" element={<Settings />} />
+          <Route path="/profile" element={<PrivateRoute>
+            <Profile />
+          </PrivateRoute>} />
+          <Route path="/settings" element={<PrivateRoute>
+            <Settings />
+          </PrivateRoute>} />
         </Routes>
       </Layout>
     </Router>

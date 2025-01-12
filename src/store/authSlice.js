@@ -3,6 +3,7 @@ import axios from 'axios';
 
 const initialState = {
     isAuthenticated: !!localStorage.getItem('jwtToken'),
+    error: ""
 }
 
 const loginAsync = createAsyncThunk('loginAsync', async (loginCredentials, { rejectWithValue }) => {
@@ -44,12 +45,13 @@ const authSlice = createSlice({
     extraReducers: (builder) => {
         builder
         .addCase(loginAsync.fulfilled, (state, action) => {
-            const token = action.payload.token;
+            const token = action.payload;
             localStorage.setItem('jwtToken', token);
             state.isAuthenticated = true;
         })
-        .addCase(loginAsync.rejected, (state) => {
+        .addCase(loginAsync.rejected, (state, action) => {
             state.isAuthenticated = false;
+            state.error = action.payload
         })
     }
 });
