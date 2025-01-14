@@ -8,6 +8,9 @@ import PostOptions from "./PostOptions";
 import AddComment from "./AddComment";
 import PostCaption from "./PostCaption";
 import Post from "./Post";
+import PostModal from "./PostModal";
+import PostModalMedia from "./PostModalMedia";
+import PostModalComment from "./PostModalComment";
 
 export {
     InputField,
@@ -19,5 +22,8 @@ export {
     PostOptions,
     AddComment,
     PostCaption,
-    Post
+    Post,
+    PostModal,
+    PostModalMedia,
+    PostModalComment
 }
