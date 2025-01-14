@@ -2,11 +2,11 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 
 const initialState = {
-    comments: [],
-    loadData: false
+    loadData: false,
+    likes: {}
 }
 
-const getCommentsAsync = createAsyncThunk('getCommentsAsync', async (post_id, { rejectWithValue }) => {
+const getLikesAsync = createAsyncThunk('likes/getLikesAsync', async (post_id, { rejectWithValue }) => {
     try {
         const token = localStorage.getItem("jwtToken");
         if (!token) {
@@ -14,7 +14,7 @@ const getCommentsAsync = createAsyncThunk('getCommentsAsync', async (post_id, { 
         }
 
         const response = await axios.get(
-            `http://localhost:8080/api/comment/get-comment/${post_id}`,
+            `http://localhost:8080/api/like/like-count/${post_id}`,
             {
                 headers: {
                     'Content-Type': 'application/json',
@@ -22,11 +22,10 @@ const getCommentsAsync = createAsyncThunk('getCommentsAsync', async (post_id, { 
                 },
             }
         );
-        return response.data;
+        return { post_id, likes: response.data };
     } catch (error) {
         if (error.response) {
             console.error(`HTTP error! Status: ${error.response.status}`);
-            console.error('Response data:', error.response.data);
             return rejectWithValue(error.response.data);
         } else if (error.request) {
             console.error('No response received:', error.request);
@@ -36,9 +35,11 @@ const getCommentsAsync = createAsyncThunk('getCommentsAsync', async (post_id, { 
             return rejectWithValue(error.message);
         }
     }
-});
+}
+);
 
-const createCommentsAsync = createAsyncThunk('createCommentsAsync', async ({post_id, comment}, { rejectWithValue }) => {
+
+const likePostAsync = createAsyncThunk('likes/likePostAsync', async (post_id, { rejectWithValue }) => {
     try {
         const token = localStorage.getItem("jwtToken");
         if (!token) {
@@ -46,8 +47,7 @@ const createCommentsAsync = createAsyncThunk('createCommentsAsync', async ({post
         }
 
         const response = await axios.post(
-            `http://localhost:8080/api/comment/create-comment/${post_id}`,
-            comment,
+            `http://localhost:8080/api/like/like-post/${post_id}`,
             {
                 headers: {
                     'Content-Type': 'application/json',
@@ -71,20 +71,56 @@ const createCommentsAsync = createAsyncThunk('createCommentsAsync', async ({post
     }
 });
 
-const commentSlice = createSlice({
-    name: 'comment',
+const unLikePostAsync = createAsyncThunk('likes/unLikePostAsync', async (post_id, { rejectWithValue }) => {
+    try {
+        const token = localStorage.getItem("jwtToken");
+        if (!token) {
+            throw new Error("Authorization token is missing.");
+        }
+
+        const response = await axios.post(
+            `http://localhost:8080/api/like/unlike-post/${post_id}`,
+            {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`,
+                },
+            }
+        );
+        return response.data;
+    } catch (error) {
+        if (error.response) {
+            console.error(`HTTP error! Status: ${error.response.status}`);
+            console.error('Response data:', error.response.data);
+            return rejectWithValue(error.response.data);
+        } else if (error.request) {
+            console.error('No response received:', error.request);
+            return rejectWithValue('No response received from the server.');
+        } else {
+            console.error('Error:', error.message);
+            return rejectWithValue(error.message);
+        }
+    }
+});
+
+const likeSlice = createSlice({
+    name: 'like',
     initialState,
     reducers: {},
     extraReducers: (builder) => {
         builder
-            .addCase(getCommentsAsync.fulfilled, (state, action) => {
-                state.comments = action.payload
+            .addCase(getLikesAsync.fulfilled, (state, action) => {
+                const { post_id, likes } = action.payload;
+                state.likes[post_id] = likes; 
             })
-            .addCase(createCommentsAsync.fulfilled, (state) => {
+            .addCase(likePostAsync.fulfilled, (state) => {
+                state.loadData = !state.loadData
+            })
+            .addCase(unLikePostAsync.fulfilled, (state) => {
                 state.loadData = !state.loadData
             })
     }
 });
 
-export default commentSlice.reducer;
-export { getCommentsAsync, createCommentsAsync }
+export default likeSlice.reducer;
+export { likePostAsync, getLikesAsync, unLikePostAsync }

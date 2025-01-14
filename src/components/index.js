@@ -11,6 +11,7 @@ import Post from "./Post";
 import PostModal from "./PostModal";
 import PostModalMedia from "./PostModalMedia";
 import PostModalComment from "./PostModalComment";
+import Comment from "./Comment";
 
 export {
     InputField,
@@ -25,5 +26,6 @@ export {
     Post,
     PostModal,
     PostModalMedia,
-    PostModalComment
+    PostModalComment,
+    Comment
 }

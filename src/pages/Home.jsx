@@ -28,7 +28,8 @@ const Home = () => {
                             <PostMedia
                                 url={post.url} />
 
-                            <PostOptions />
+                            <PostOptions
+                                post={post} />
 
                             <AddComment
                                 post={post} />
