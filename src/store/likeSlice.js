@@ -48,6 +48,7 @@ const likePostAsync = createAsyncThunk('likes/likePostAsync', async (post_id, { 
 
         const response = await axios.post(
             `http://localhost:8080/api/like/like-post/${post_id}`,
+            {},
             {
                 headers: {
                     'Content-Type': 'application/json',
@@ -80,6 +81,7 @@ const unLikePostAsync = createAsyncThunk('likes/unLikePostAsync', async (post_id
 
         const response = await axios.post(
             `http://localhost:8080/api/like/unlike-post/${post_id}`,
+            {},
             {
                 headers: {
                     'Content-Type': 'application/json',

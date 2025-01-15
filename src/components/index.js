@@ -12,6 +12,9 @@ import PostModal from "./PostModal";
 import PostModalMedia from "./PostModalMedia";
 import PostModalComment from "./PostModalComment";
 import Comment from "./Comment";
+import ProfileHeader from "./ProfileHeader";
+import ProfileTabs from "./ProfileTabs";
+import ProfilePostGrid from "./ProfilePostGrid";
 
 export {
     InputField,
@@ -27,5 +30,8 @@ export {
     PostModal,
     PostModalMedia,
     PostModalComment,
-    Comment
+    Comment,
+    ProfileHeader,
+    ProfileTabs,
+    ProfilePostGrid
 }

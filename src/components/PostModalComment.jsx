@@ -45,11 +45,12 @@ const PostModalComment = ({ post }) => {
 
             <div className="flex-grow overflow-y-auto mb-4 text-sm">
                 {comments.map((comment, index) => (
-                    <Comment
-                        id={index}
-                        userName={comment.userId.userName}
-                        profilePic={comment.userId.profilePic}
-                        content={comment.content} />
+                    <React.Fragment key={index}>
+                        <Comment
+                            userName={comment.userId.userName}
+                            profilePic={comment.userId.profilePic}
+                            content={comment.content} />
+                    </React.Fragment>
                 ))}
             </div>
 

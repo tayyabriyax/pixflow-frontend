@@ -1,8 +1,8 @@
 import React from 'react'
 
-const Comment = ({ id, profilePic, userName, content }) => {
+const Comment = ({ profilePic, userName, content }) => {
     return (
-        <div key={id} className="flex items-center mb-4">
+        <div className="flex items-center mb-4">
             <img
                 src={`http://localhost:8080${profilePic}`}
                 alt="https://via.placeholder.com/40"

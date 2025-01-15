@@ -3,12 +3,14 @@ import authReducer from './authSlice';
 import postReducer from './postSlice';
 import commentReducer from "./commentSlice";
 import likeReducer from "./likeSlice";
+import userReducer from "./userSlice"
 
 export const store = configureStore({
     reducer: {
         auth: authReducer,
         post: postReducer,
         comment: commentReducer,
-        like: likeReducer
+        like: likeReducer,
+        user: userReducer
     },
 });
