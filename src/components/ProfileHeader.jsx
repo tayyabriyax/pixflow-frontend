@@ -1,6 +1,19 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getFollowersAsync, getFollowingAsync } from '../store/followSlice';
 
 const ProfileHeader = ({ user }) => {
+
+    const followers = useSelector((state) => state.follow.followers);
+    const following = useSelector((state) => state.follow.following);
+
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(getFollowersAsync());
+        dispatch(getFollowingAsync());
+    }, [])
+
     return (
         <div className="bg-white shadow-md p-6 flex items-center justify-center space-x-10 cursor-auto py-20">
             <div className="w-32 h-32 rounded-full overflow-hidden border border-gray-300">
@@ -24,10 +37,10 @@ const ProfileHeader = ({ user }) => {
                         <strong className="text-black">{user.posts ? user.posts.length : 0}</strong> posts
                     </span>
                     <span>
-                        <strong className="text-black">0</strong> followers
+                        <strong className="text-black">{followers.length}</strong> followers
                     </span>
                     <span>
-                        <strong className="text-black">6</strong> following
+                        <strong className="text-black">{following.length}</strong> following
                     </span>
                 </div>
 

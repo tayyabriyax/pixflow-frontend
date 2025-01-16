@@ -1,6 +1,8 @@
 import React from 'react';
 import { FaHome, FaUser, FaCog, FaSignOutAlt } from 'react-icons/fa';
 import SidebarLink from './SidebarLink';
+import { useDispatch } from 'react-redux';
+import { logout } from '../store/authSlice';
 
 const Sidebar = ({ theme }) => {
 
@@ -8,6 +10,8 @@ const Sidebar = ({ theme }) => {
     const bgClass = isDark ? 'bg-black' : `bg-white`;
     const textClass = isDark ? 'text-gray-200' : 'text-gray-800';
     const hoverClass = 'hover:bg-purple-300';
+
+    const dispatch = useDispatch();
 
     return (
         <div className={`h-screen w-64 ${bgClass} border-r ${textClass} fixed flex flex-col`}>
@@ -43,7 +47,7 @@ const Sidebar = ({ theme }) => {
             <div className="mt-auto mb-4">
                 <button
                     className={`flex items-center w-full p-3 rounded-lg ${hoverClass} focus:outline-none`}
-                    onClick={() => alert('Logging out...')}
+                    onClick={() => dispatch(logout())}
                 >
                     <FaSignOutAlt className="mr-3" />
                     Logout
