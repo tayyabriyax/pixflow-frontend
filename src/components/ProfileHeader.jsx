@@ -2,7 +2,7 @@ import React from 'react';
 
 const ProfileHeader = ({ user }) => {
     return (
-        <div className="bg-white shadow-md p-6 flex items-center space-x-6 cursor-auto">
+        <div className="bg-white shadow-md p-6 flex items-center justify-center space-x-10 cursor-auto py-20">
             <div className="w-32 h-32 rounded-full overflow-hidden border border-gray-300">
                 <img
                     src={`http://localhost:8080${user.profilePic}`}
@@ -17,14 +17,11 @@ const ProfileHeader = ({ user }) => {
                     <button className="px-4 py-2 bg-gray-100 text-sm font-semibold rounded hover:bg-gray-200">
                         Edit profile
                     </button>
-                    <button className="px-4 py-2 bg-gray-100 text-sm font-semibold rounded hover:bg-gray-200">
-                        View archive
-                    </button>
                 </div>
 
                 <div className="flex space-x-4 text-sm text-gray-600">
                     <span>
-                        <strong className="text-black">0</strong> posts
+                        <strong className="text-black">{user.posts ? user.posts.length : 0}</strong> posts
                     </span>
                     <span>
                         <strong className="text-black">0</strong> followers
@@ -34,7 +31,6 @@ const ProfileHeader = ({ user }) => {
                     </span>
                 </div>
 
-                {/* Full Name */}
                 <div className="text-sm font-medium text-gray-800">{user.email}</div>
             </div>
         </div>

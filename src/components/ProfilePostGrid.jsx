@@ -2,11 +2,11 @@ import React from 'react';
 
 const ProfilePostGrid = ({ posts }) => {
     return (
-        <div className="grid grid-cols-3 gap-2">
+        <div className="grid grid-cols-6 gap-2 cursor-auto">
             {posts.map((post, index) => (
-                <div key={index} className="aspect-square bg-gray-200">
+                <div key={index} className="aspect-square bg-gray-200 cursor-pointer">
                     <img
-                        src={post.url}
+                        src={`http://localhost:8080${post.url}`}
                         alt={`Post ${index + 1}`}
                         className="w-full h-full object-cover"
                     />

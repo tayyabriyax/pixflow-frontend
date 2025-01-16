@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ProfileHeader, ProfileTabs } from '../components';
+import { ProfileHeader, ProfilePostGrid, ProfileTabs } from '../components';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUserDetailsAsync } from '../store/userSlice';
 
@@ -29,9 +29,10 @@ const Profile = () => {
             <ProfileTabs activeTab={activeTab} onTabChange={handleTabChange} />
 
             <div className="p-4">
-                {activeTab === 'Posts' && <div>Show Posts Grid</div>}
-                {activeTab === 'Favorites' && <div>Show Favorites Grid</div>}
-                {activeTab === 'Bookmarks' && <div>Show Bookmarks Grid</div>}
+                {activeTab === 'Posts' && <ProfilePostGrid
+                    posts={userDetails.posts ? userDetails.posts : []} />}
+                {activeTab === 'Favorites' && <div>No Favorites</div>}
+                {activeTab === 'Bookmarks' && <div>No Bookmarks</div>}
             </div>
         </Link>
     );

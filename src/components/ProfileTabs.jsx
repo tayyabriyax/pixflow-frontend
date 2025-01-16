@@ -4,7 +4,7 @@ const ProfileTabs = ({ activeTab, onTabChange }) => {
     const tabs = ['Posts', 'Favorites', 'Bookmarks'];
 
     return (
-        <div className="bg-white shadow-md flex justify-center space-x-4 py-2">
+        <div className="bg-white border-b flex justify-center space-x-4 py-2">
             {tabs.map((tab) => (
                 <button
                     key={tab}
