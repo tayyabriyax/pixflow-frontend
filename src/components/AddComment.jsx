@@ -35,7 +35,7 @@ const AddComment = ({ post }) => {
     return (
         <div className="mt-2">
             <span className='text-sm font-semibold'>Likes</span>
-            <span className='text-sm'>{" " + likes}</span>
+            <span className='text-sm'>{" " + likes.likesCount}</span>
             <form className="flex items-center space-x-2 mt-2">
                 <input
                     type="text"

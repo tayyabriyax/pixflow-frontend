@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { getPostsAsync } from '../store/postSlice';
 import { AddComment, Post, PostAuther, PostMedia, PostOptions } from '../components';
+import { getUserDetailsAsync } from '../store/userSlice';
 
 const Home = () => {
 
@@ -12,6 +13,7 @@ const Home = () => {
 
     useEffect(() => {
         dispatch(getPostsAsync());
+        dispatch(getUserDetailsAsync())
     }, [])
 
     return (

@@ -39,6 +39,7 @@ const authSlice = createSlice({
     reducers: {
         logout: (state) => {
             localStorage.removeItem('jwtToken');
+            localStorage.removeItem('userName');
             state.isAuthenticated = false;
         },
     },

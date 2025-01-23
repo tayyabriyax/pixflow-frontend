@@ -46,6 +46,8 @@ const userSlice = createSlice({
         builder
             .addCase(getUserDetailsAsync.fulfilled, (state, action) => {
                 state.userDetails = action.payload
+                const userName = action.payload.userName;
+                localStorage.setItem("userName", userName)
             })
     }
 });
