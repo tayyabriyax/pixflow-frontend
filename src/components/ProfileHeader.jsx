@@ -1,8 +1,13 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getFollowersAsync, getFollowingAsync } from '../store/followSlice';
+import FollowListModal from './FollowListModal';
 
 const ProfileHeader = ({ user }) => {
+
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [modalTitle, setModalTitle] = useState('');
+    const [modalData, setModalData] = useState([]);
 
     const followers = useSelector((state) => state.follow.followers);
     const following = useSelector((state) => state.follow.following);
@@ -12,7 +17,13 @@ const ProfileHeader = ({ user }) => {
     useEffect(() => {
         dispatch(getFollowersAsync());
         dispatch(getFollowingAsync());
-    }, [])
+    }, []);
+
+    const handleOpenModal = (title, data) => {
+        setModalTitle(title);
+        setModalData(data);
+        setIsModalOpen(true);
+    };
 
     return (
         <div className="bg-white shadow-md p-6 flex items-center justify-center space-x-10 cursor-auto py-20">
@@ -36,12 +47,20 @@ const ProfileHeader = ({ user }) => {
                     <span>
                         <strong className="text-black">{user.posts ? user.posts.length : 0}</strong> posts
                     </span>
-                    <span>
+                    <button onClick={() => handleOpenModal('Followers', followers)}>
                         <strong className="text-black">{followers.length}</strong> followers
-                    </span>
-                    <span>
-                        <strong className="text-black">{following.length}</strong> following
-                    </span>
+                    </button>
+                    <button onClick={() => handleOpenModal('Following', following)}>
+                        <strong className="text-black">{following.length}</strong> followers
+                    </button>
+
+                    {isModalOpen && (
+                        <FollowListModal
+                            title={modalTitle}
+                            users={modalData}
+                            onClose={() => setIsModalOpen(false)}
+                        />
+                    )}
                 </div>
 
                 <div className="text-sm font-medium text-gray-800">{user.email}</div>
