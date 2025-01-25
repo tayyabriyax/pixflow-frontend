@@ -6,11 +6,38 @@ const initialState = {
     error: ""
 }
 
-const loginAsync = createAsyncThunk('loginAsync', async (loginCredentials, { rejectWithValue }) => {
+const loginAsync = createAsyncThunk('auth/loginAsync', async (loginCredentials, { rejectWithValue }) => {
     try {
         const response = await axios.post(
             'http://localhost:8080/api/public/sign-in',
             loginCredentials,
+            {
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            }
+        );
+        return response.data;  
+    } catch (error) {
+        if (error.response) {
+            console.error(`HTTP error! Status: ${error.response.status}`);
+            console.error('Response data:', error.response.data);
+            return rejectWithValue(error.response.data);
+        } else if (error.request) {
+            console.error('No response received:', error.request);
+            return rejectWithValue('No response received from the server.');
+        } else {
+            console.error('Error:', error.message);
+            return rejectWithValue(error.message);
+        }
+    }
+});
+
+const signupAsync = createAsyncThunk('auth/signupAsync', async (signupCredentials, { rejectWithValue }) => {
+    try {
+        const response = await axios.post(
+            'http://localhost:8080/api/public/sign-up',
+            signupCredentials,
             {
                 headers: {
                     'Content-Type': 'application/json',
@@ -59,4 +86,4 @@ const authSlice = createSlice({
 
 export const { logout } = authSlice.actions;
 export default authSlice.reducer;
-export {loginAsync}
+export {loginAsync, signupAsync}

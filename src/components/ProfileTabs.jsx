@@ -1,7 +1,7 @@
 import React from 'react';
 
 const ProfileTabs = ({ activeTab, onTabChange }) => {
-    const tabs = ['Posts', 'Favorites', 'Bookmarks'];
+    const tabs = ['Posts', 'Bookmarks'];
 
     return (
         <div className="bg-white border-b flex justify-center space-x-4 py-2">
