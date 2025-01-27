@@ -17,6 +17,7 @@ import ProfileTabs from "./ProfileTabs";
 import ProfilePostGrid from "./ProfilePostGrid";
 import FollowListModal from "./FollowListModal";
 import FollowListItem from "./FollowListItem";
+import EditProfileModal from "./EditProfileModal";
 
 export {
     InputField,
@@ -37,5 +38,6 @@ export {
     ProfileTabs,
     ProfilePostGrid,
     FollowListModal,
-    FollowListItem
+    FollowListItem, 
+    EditProfileModal
 }

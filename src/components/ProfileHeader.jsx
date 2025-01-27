@@ -2,12 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getFollowersAsync, getFollowingAsync } from '../store/followSlice';
 import FollowListModal from './FollowListModal';
+import EditProfileModal from './EditProfileModal';
 
 const ProfileHeader = ({ user }) => {
 
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [modalTitle, setModalTitle] = useState('');
     const [modalData, setModalData] = useState([]);
+    const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
     const followers = useSelector((state) => state.follow.followers);
     const following = useSelector((state) => state.follow.following);
@@ -38,10 +40,18 @@ const ProfileHeader = ({ user }) => {
             <div className="flex flex-col space-y-2">
                 <div className="flex items-center space-x-4">
                     <h2 className="text-2xl font-bold">{user.userName}</h2>
-                    <button className="px-4 py-2 bg-gray-100 text-sm font-semibold rounded hover:bg-gray-200">
+                    <button onClick={() => setIsEditModalOpen(true)}
+                        className="px-4 py-2 bg-gray-100 text-sm font-semibold rounded hover:bg-gray-200">
                         Edit profile
                     </button>
                 </div>
+
+                {isEditModalOpen && (
+                    <EditProfileModal
+                        userData={user}
+                        onClose={() => setIsEditModalOpen(false)}
+                    />
+                )}
 
                 <div className="flex space-x-4 text-sm text-gray-600">
                     <span>
