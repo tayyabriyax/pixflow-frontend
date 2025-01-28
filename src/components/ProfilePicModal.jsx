@@ -9,7 +9,7 @@ const ProfilePicModal = ({ onClose, onSave }) => {
         if (file) {
             const reader = new FileReader();
             reader.onloadend = () => {
-                setPreviewImage(reader.result); // Show a preview of the image
+                setPreviewImage(reader.result); 
             };
             reader.readAsDataURL(file);
         }
@@ -17,8 +17,8 @@ const ProfilePicModal = ({ onClose, onSave }) => {
 
     const handleSave = () => {
         if (previewImage) {
-            onSave(previewImage); // Pass the selected image back
-            onClose(); // Close the modal
+            onSave(previewImage); 
+            onClose(); 
         }
     };
 

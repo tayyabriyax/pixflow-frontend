@@ -7,12 +7,13 @@ import { getUserDetailsAsync } from '../store/userSlice';
 const Profile = () => {
 
     const userDetails = useSelector((state) => state.user.userDetails);
+    const loadData = useSelector((state) => state.user.loadData);
 
     const dispatch = useDispatch();
 
     useEffect(() => {
         dispatch(getUserDetailsAsync());
-    }, [])
+    }, [loadData])
 
     const [activeTab, setActiveTab] = useState('Posts');
 

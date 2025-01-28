@@ -2,13 +2,14 @@ import React, { useState } from 'react';
 import { AiOutlineClose } from 'react-icons/ai';
 import InputField from './InputField';
 import ProfilePicModal from './ProfilePicModal';
+import { useDispatch } from 'react-redux';
+import { updateUserAsync } from '../store/userSlice';
 
-const EditProfileModal = ({ userData, onClose, onSave }) => {
+const EditProfileModal = ({ userData, onClose }) => {
     const [formData, setFormData] = useState({
-        username: userData.userName || '',
+        userName: userData.userName || '',
         email: userData.email || '',
-        about: userData.about || '',
-        profilePic: userData.profilePic || '',
+        about: userData.about || ''
     });
 
     const [isProfilePicModalOpen, setIsProfilePicModalOpen] = useState(false);
@@ -18,9 +19,11 @@ const EditProfileModal = ({ userData, onClose, onSave }) => {
         setFormData({ ...formData, [name]: value });
     };
 
+    const dispatch = useDispatch();
+
     const handleSubmit = (e) => {
         e.preventDefault();
-        onSave(formData);
+        dispatch(updateUserAsync(formData));
         onClose();
     };
 
@@ -38,7 +41,7 @@ const EditProfileModal = ({ userData, onClose, onSave }) => {
                     </button>
                 </div>
 
-                <form onSubmit={handleSubmit} className="p-4 space-y-4">
+                <form className="p-4 space-y-4">
 
                     <div className="flex flex-col items-center space-y-2">
                         <div
@@ -46,7 +49,7 @@ const EditProfileModal = ({ userData, onClose, onSave }) => {
                             onClick={() => setIsProfilePicModalOpen(true)}
                         >
                             <img
-                                src={`http://localhost:8080${formData.profilePic}`}
+                                src={`http://localhost:8080${userData.profilePic}`}
                                 alt="Profile"
                                 className="w-full h-full object-cover"
                             />
@@ -58,9 +61,9 @@ const EditProfileModal = ({ userData, onClose, onSave }) => {
 
                     <InputField
                         label={"Username"}
-                        name={"username"}
+                        name={"userName"}
                         type={"text"}
-                        value={formData.username}
+                        value={formData.userName}
                         onChange={handleChange}
                         placeholder={"Enter your username"} />
 
@@ -87,11 +90,13 @@ const EditProfileModal = ({ userData, onClose, onSave }) => {
 
                     <div className="flex justify-end space-x-2">
                         <button
+                            onClick={onClose}
                             className="px-4 py-2 bg-gray-300 text-gray-700 rounded hover:bg-gray-400"
                         >
                             Cancel
                         </button>
                         <button
+                            onClick={handleSubmit}
                             className="px-4 py-2 bg-purple-500 text-white font-semibold rounded hover:bg-purple-600"
                         >
                             Save
