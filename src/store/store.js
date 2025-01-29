@@ -5,6 +5,7 @@ import commentReducer from "./commentSlice";
 import likeReducer from "./likeSlice";
 import userReducer from "./userSlice";
 import followReducer from "./followSlice";
+import bookmarkReducer from "./bookmarkSlice"
 
 export const store = configureStore({
     reducer: {
@@ -13,6 +14,7 @@ export const store = configureStore({
         comment: commentReducer,
         like: likeReducer,
         user: userReducer,
-        follow: followReducer
+        follow: followReducer,
+        bookmark: bookmarkReducer,
     },
 });

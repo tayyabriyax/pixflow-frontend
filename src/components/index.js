@@ -19,6 +19,7 @@ import FollowListModal from "./FollowListModal";
 import FollowListItem from "./FollowListItem";
 import EditProfileModal from "./EditProfileModal";
 import ProfilePicModal from "./ProfilePicModal";
+import ProfileBookmarksGrid from "./ProfileBookmarksGrid";
 
 export {
     InputField,
@@ -41,5 +42,6 @@ export {
     FollowListModal,
     FollowListItem, 
     EditProfileModal,
-    ProfilePicModal
+    ProfilePicModal,
+    ProfileBookmarksGrid
 }

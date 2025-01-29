@@ -8,6 +8,7 @@ import {
 import PostModal from './PostModal';
 import { useDispatch } from 'react-redux';
 import { likePostAsync, unLikePostAsync } from '../store/likeSlice';
+import { addBookmarkAsync, removeBookmarkAsync } from '../store/bookmarkSlice';
 
 const PostOptions = ({ post }) => {
 
@@ -24,6 +25,14 @@ const PostOptions = ({ post }) => {
 
     const unLikePost = () => {
         dispatch(unLikePostAsync(post.id));
+    }
+
+    const addBookmark = () => {
+        dispatch(addBookmarkAsync(post.id));
+    }
+
+    const removeBookmark = () => {
+        dispatch(removeBookmarkAsync(post.id));
     }
 
     return (
@@ -52,7 +61,7 @@ const PostOptions = ({ post }) => {
                 onClick={() => setBookmarked(!bookmarked)}
                 className={`flex items-center ${bookmarked ? 'text-yellow-500' : 'text-gray-600 hover:text-yellow-500'}`}
             >
-                {bookmarked ? <FaBookmark size={20} /> : <FaRegBookmark size={20} />}
+                {bookmarked ? <FaBookmark onClick={removeBookmark} size={20} /> : <FaRegBookmark onClick={addBookmark} size={20} />}
             </button>
 
             {showModal &&

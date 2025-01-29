@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { AiOutlineClose } from 'react-icons/ai';
+import SaveButton from './SaveButton';
+import CancelButton from './CancelButton';
 
 const ProfilePicModal = ({ onClose, onSave }) => {
     const [previewImage, setPreviewImage] = useState(null);
@@ -9,7 +11,7 @@ const ProfilePicModal = ({ onClose, onSave }) => {
         if (file) {
             const reader = new FileReader();
             reader.onloadend = () => {
-                setPreviewImage(reader.result); 
+                setPreviewImage(reader.result);
             };
             reader.readAsDataURL(file);
         }
@@ -17,8 +19,8 @@ const ProfilePicModal = ({ onClose, onSave }) => {
 
     const handleSave = () => {
         if (previewImage) {
-            onSave(previewImage); 
-            onClose(); 
+            onSave(previewImage);
+            onClose();
         }
     };
 
@@ -49,18 +51,11 @@ const ProfilePicModal = ({ onClose, onSave }) => {
                         />
                     </label>
                     <div className="flex justify-end space-x-2">
-                        <button
-                            onClick={onClose}
-                            className="px-4 py-2 bg-gray-300 text-gray-700 rounded hover:bg-gray-400"
-                        >
-                            Cancel
-                        </button>
-                        <button
-                            onClick={handleSave}
-                            className="px-4 py-2 bg-purple-500 text-white font-semibold rounded hover:bg-purple-600"
-                        >
-                            Save
-                        </button>
+                        <CancelButton
+                            onClick={onClose} />
+
+                        <SaveButton
+                            onClick={handleSave} />
                     </div>
                 </div>
             </div>

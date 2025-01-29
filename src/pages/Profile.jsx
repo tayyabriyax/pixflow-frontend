@@ -1,18 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ProfileHeader, ProfilePostGrid, ProfileTabs } from '../components';
+import { ProfileBookmarksGrid, ProfileHeader, ProfilePostGrid, ProfileTabs } from '../components';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUserDetailsAsync } from '../store/userSlice';
+import { getBookmarkAsync } from '../store/bookmarkSlice';
 
 const Profile = () => {
 
     const userDetails = useSelector((state) => state.user.userDetails);
+    const bookmarks = useSelector((state) => state.bookmark.bookmarks);
     const loadData = useSelector((state) => state.user.loadData);
 
     const dispatch = useDispatch();
 
     useEffect(() => {
         dispatch(getUserDetailsAsync());
+        dispatch(getBookmarkAsync());
     }, [loadData])
 
     const [activeTab, setActiveTab] = useState('Posts');
@@ -32,8 +35,8 @@ const Profile = () => {
             <div className="p-4">
                 {activeTab === 'Posts' && <ProfilePostGrid
                     posts={userDetails.posts ? userDetails.posts : []} />}
-                {activeTab === 'Favorites' && <div>No Favorites</div>}
-                {activeTab === 'Bookmarks' && <div>No Bookmarks</div>}
+                {activeTab === 'Bookmarks' && <ProfileBookmarksGrid
+                    posts={bookmarks ? bookmarks : []} />}
             </div>
         </Link>
     );

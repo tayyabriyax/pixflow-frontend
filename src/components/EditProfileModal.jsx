@@ -4,6 +4,8 @@ import InputField from './InputField';
 import ProfilePicModal from './ProfilePicModal';
 import { useDispatch } from 'react-redux';
 import { updateUserAsync } from '../store/userSlice';
+import CancelButton from './CancelButton';
+import SaveButton from './SaveButton';
 
 const EditProfileModal = ({ userData, onClose }) => {
     const [formData, setFormData] = useState({
@@ -89,18 +91,11 @@ const EditProfileModal = ({ userData, onClose }) => {
                     </div>
 
                     <div className="flex justify-end space-x-2">
-                        <button
-                            onClick={onClose}
-                            className="px-4 py-2 bg-gray-300 text-gray-700 rounded hover:bg-gray-400"
-                        >
-                            Cancel
-                        </button>
-                        <button
-                            onClick={handleSubmit}
-                            className="px-4 py-2 bg-purple-500 text-white font-semibold rounded hover:bg-purple-600"
-                        >
-                            Save
-                        </button>
+                        <CancelButton
+                            onClick={onClose} />
+
+                        <SaveButton
+                            onClick={handleSubmit} />
                     </div>
                 </form>
             </div>
