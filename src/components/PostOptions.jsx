@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
     FaRegHeart, FaHeart,
     FaRegShareSquare,
@@ -6,8 +6,8 @@ import {
     FaRegComment
 } from 'react-icons/fa';
 import PostModal from './PostModal';
-import { useDispatch } from 'react-redux';
-import { likePostAsync, unLikePostAsync } from '../store/likeSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { getLikesAsync, likePostAsync, unLikePostAsync } from '../store/likeSlice';
 import { addBookmarkAsync, removeBookmarkAsync } from '../store/bookmarkSlice';
 
 const PostOptions = ({ post }) => {
@@ -16,6 +16,11 @@ const PostOptions = ({ post }) => {
 
     const [liked, setLiked] = useState(false);
     const [bookmarked, setBookmarked] = useState(false);
+
+    const likes = useSelector((state) => state.like.likes[post.id] || 0);
+    const loadData = useSelector((state) => state.like.loadData);
+
+    const username = localStorage.getItem("userName");
 
     const dispatch = useDispatch();
 
@@ -35,40 +40,50 @@ const PostOptions = ({ post }) => {
         dispatch(removeBookmarkAsync(post.id));
     }
 
+    useEffect(() => {
+        dispatch(getLikesAsync(post.id));
+    }, [loadData])
+
     return (
-        <div className="flex justify-between items-center mt-4">
-            <div className="flex space-x-4">
+        <>
+            <div className="flex justify-between items-center mt-4">
+                <div className="flex space-x-4">
+
+                    <button
+                        onClick={() => setLiked(!liked)}
+                        className={`flex items-center ${liked ? 'text-red-500' : 'text-gray-600 hover:text-red-500'}`}
+                    >
+                        {liked ? <FaHeart onClick={unLikePost} className="mr-1" size={20} /> :
+                            <FaRegHeart onClick={likePost} className="mr-1" size={20} />}
+                    </button>
+
+                    <button onClick={() => setShowModal(true)}
+                        className="flex items-center text-gray-600 hover:text-blue-500">
+                        <FaRegComment className="mr-1" size={20} />
+                    </button>
+
+                    <button className="flex items-center text-gray-600 hover:text-green-500">
+                        <FaRegShareSquare className="mr-1" size={20} />
+                    </button>
+                </div>
 
                 <button
-                    onClick={() => setLiked(!liked)}
-                    className={`flex items-center ${liked ? 'text-red-500' : 'text-gray-600 hover:text-red-500'}`}
+                    onClick={() => setBookmarked(!bookmarked)}
+                    className={`flex items-center ${bookmarked ? 'text-yellow-500' : 'text-gray-600 hover:text-yellow-500'}`}
                 >
-                    {liked ? <FaHeart onClick={unLikePost} className="mr-1" size={20} /> :
-                        <FaRegHeart onClick={likePost} className="mr-1" size={20} />}
+                    {bookmarked ? <FaBookmark onClick={removeBookmark} size={20} /> : <FaRegBookmark onClick={addBookmark} size={20} />}
                 </button>
 
-                <button onClick={() => setShowModal(true)}
-                    className="flex items-center text-gray-600 hover:text-blue-500">
-                    <FaRegComment className="mr-1" size={20} />
-                </button>
-
-                <button className="flex items-center text-gray-600 hover:text-green-500">
-                    <FaRegShareSquare className="mr-1" size={20} />
-                </button>
+                {showModal &&
+                    <PostModal
+                        post={post}
+                        onClose={() => setShowModal(false)} />}
             </div>
-
-            <button
-                onClick={() => setBookmarked(!bookmarked)}
-                className={`flex items-center ${bookmarked ? 'text-yellow-500' : 'text-gray-600 hover:text-yellow-500'}`}
-            >
-                {bookmarked ? <FaBookmark onClick={removeBookmark} size={20} /> : <FaRegBookmark onClick={addBookmark} size={20} />}
-            </button>
-
-            {showModal &&
-                <PostModal
-                    post={post}
-                    onClose={() => setShowModal(false)} />}
-        </div>
+            <div className='mt-2'>
+                <span className='text-sm font-semibold'>Likes</span>
+                <span className='text-sm'>{" " + likes.likesCount}</span>
+            </div>
+        </>
     );
 }
 
