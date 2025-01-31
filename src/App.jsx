@@ -5,6 +5,7 @@ import {
   Route
 } from 'react-router-dom';
 import {
+  Create,
   Home,
   Profile,
   Settings,
@@ -24,6 +25,9 @@ const App = () => {
             <PrivateRoute>
               <Home />
             </PrivateRoute>} />
+          <Route path="/create" element={<PrivateRoute>
+            <Create />
+          </PrivateRoute>} />
           <Route path="/profile" element={<PrivateRoute>
             <Profile />
           </PrivateRoute>} />
