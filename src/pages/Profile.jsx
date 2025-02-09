@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import { ProfileBookmarksGrid, ProfileHeader, ProfilePostGrid, ProfileTabs } from '../components';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUserDetailsAsync } from '../store/userSlice';
@@ -25,7 +24,7 @@ const Profile = () => {
     };
 
     return (
-        <Link to={"/profile"} className="min-h-screen bg-white">
+        <div className="min-h-screen bg-white">
 
             <ProfileHeader
                 user={userDetails} />
@@ -38,7 +37,8 @@ const Profile = () => {
                 {activeTab === 'Bookmarks' && <ProfileBookmarksGrid
                     posts={bookmarks ? bookmarks : []} />}
             </div>
-        </Link>
+
+        </div>
     );
 };
 

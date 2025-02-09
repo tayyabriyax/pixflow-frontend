@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
 import { getPostsAsync } from '../store/postSlice';
 import { AddComment, Post, PostAuther, PostMedia, PostOptions } from '../components';
 import { getUserDetailsAsync } from '../store/userSlice';
@@ -17,7 +16,7 @@ const Home = () => {
     }, [])
 
     return (
-        <Link to={"/home"} className="flex min-h-screen bg-white cursor-auto">
+        <div className="flex min-h-screen bg-white cursor-auto">
 
             <div className="flex-grow p-4">
                 {
@@ -44,7 +43,7 @@ const Home = () => {
                 <h2 className="text-lg font-semibold text-gray-700">More Features</h2>
                 <p className="text-sm text-gray-500">Placeholder for additional features...</p>
             </div>
-        </Link>
+        </div>
     );
 };
 
