@@ -43,5 +43,5 @@ export {
     FollowListItem, 
     EditProfileModal,
     ProfilePicModal,
-    ProfileBookmarksGrid
+    ProfileBookmarksGrid,
 }

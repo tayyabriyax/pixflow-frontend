@@ -61,7 +61,7 @@ const ProfileHeader = ({ user }) => {
                         <strong className="text-black">{followers.length}</strong> followers
                     </button>
                     <button onClick={() => handleOpenModal('Following', following)}>
-                        <strong className="text-black">{following.length}</strong> followers
+                        <strong className="text-black">{following.length}</strong> following
                     </button>
 
                     {isModalOpen && (

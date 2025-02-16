@@ -44,6 +44,12 @@ const PostOptions = ({ post }) => {
         dispatch(getLikesAsync(post.id));
     }, [loadData])
 
+    useEffect(() => {
+        if (likes?.likes?.some((like) => like.user.userName === username)) {
+            setLiked(true);
+        }
+    }, [likes])
+
     return (
         <>
             <div className="flex justify-between items-center mt-4">
