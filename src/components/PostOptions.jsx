@@ -8,7 +8,7 @@ import {
 import PostModal from './PostModal';
 import { useDispatch, useSelector } from 'react-redux';
 import { getLikesAsync, likePostAsync, unLikePostAsync } from '../store/likeSlice';
-import { addBookmarkAsync, removeBookmarkAsync } from '../store/bookmarkSlice';
+import { addBookmarkAsync, getBookmarkAsync, removeBookmarkAsync } from '../store/bookmarkSlice';
 
 const PostOptions = ({ post }) => {
 
@@ -19,6 +19,7 @@ const PostOptions = ({ post }) => {
 
     const likes = useSelector((state) => state.like.likes[post.id] || 0);
     const loadData = useSelector((state) => state.like.loadData);
+    const bookmarks = useSelector((state) => state.bookmark.bookmarks);
 
     const username = localStorage.getItem("userName");
 
@@ -42,6 +43,7 @@ const PostOptions = ({ post }) => {
 
     useEffect(() => {
         dispatch(getLikesAsync(post.id));
+        dispatch(getBookmarkAsync());
     }, [loadData])
 
     useEffect(() => {
@@ -49,6 +51,12 @@ const PostOptions = ({ post }) => {
             setLiked(true);
         }
     }, [likes])
+
+    useEffect(() => {
+        if (bookmarks?.some((bookmark) => bookmark.post.id === post.id)) {
+            setBookmarked(true);
+        }
+    }, [bookmarks])
 
     return (
         <>
