@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { ProfileBookmarksGrid, ProfileHeader, ProfilePostGrid, ProfileTabs } from '../components';
+import { EmptyState, ProfileBookmarksGrid, ProfileHeader, ProfilePostGrid, ProfileTabs } from '../components';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUserDetailsAsync } from '../store/userSlice';
 import { getBookmarkAsync } from '../store/bookmarkSlice';
@@ -29,13 +29,40 @@ const Profile = () => {
             <ProfileHeader
                 user={userDetails} />
 
-            <ProfileTabs activeTab={activeTab} onTabChange={handleTabChange} />
+            <ProfileTabs
+                activeTab={activeTab}
+                onTabChange={handleTabChange} />
 
             <div className="p-4">
-                {activeTab === 'Posts' && <ProfilePostGrid
-                    posts={userDetails.posts ? userDetails.posts : []} />}
-                {activeTab === 'Bookmarks' && <ProfileBookmarksGrid
-                    posts={bookmarks ? bookmarks : []} />}
+                {activeTab === "Posts" && (
+                    <>
+                        {userDetails.posts && userDetails.posts.length > 0 ? (
+                            <ProfilePostGrid posts={userDetails.posts} />
+                        ) : (
+                            <EmptyState
+                                title="Share Photos"
+                                description="When you share photos, they will appear on your profile."
+                                actionText="Share your first photo"
+                                onActionClick={() => console.log("Redirect to create post page")}
+                            />
+                        )}
+                    </>
+                )}
+
+                {activeTab === "Bookmarks" && (
+                    <>
+                        {bookmarks && bookmarks.length > 0 ? (
+                            <ProfileBookmarksGrid posts={bookmarks} />
+                        ) : (
+                            <EmptyState
+                                title="No Bookmarks Yet"
+                                description="Save posts you like to find them later."
+                                actionText="Explore Posts"
+                                onActionClick={() => console.log("Redirect to explore page")}
+                            />
+                        )}
+                    </>
+                )}
             </div>
 
         </div>

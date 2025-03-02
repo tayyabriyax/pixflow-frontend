@@ -20,6 +20,7 @@ import FollowListItem from "./FollowListItem";
 import EditProfileModal from "./EditProfileModal";
 import ProfilePicModal from "./ProfilePicModal";
 import ProfileBookmarksGrid from "./ProfileBookmarksGrid";
+import EmptyState from "./EmptyState";
 
 export {
     InputField,
@@ -44,4 +45,5 @@ export {
     EditProfileModal,
     ProfilePicModal,
     ProfileBookmarksGrid,
+    EmptyState
 }
