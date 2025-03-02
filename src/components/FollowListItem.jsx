@@ -1,4 +1,5 @@
 import React from 'react';
+import { IMAGE_URL } from '../store/constants';
 
 const FollowListItem = ({ user }) => {
     return (
@@ -6,7 +7,7 @@ const FollowListItem = ({ user }) => {
 
             <div className="w-10 h-10 rounded-full overflow-hidden border border-gray-300">
                 <img
-                    src={`http://localhost:8080${user.profilePic}`}
+                    src={`${IMAGE_URL}${user.profilePic}`}
                     alt={user.username}
                     className="w-full h-full object-cover"
                 />

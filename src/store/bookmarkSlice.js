@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
+import { BASE_URL } from './constants';
 
 const initialState = {
     bookmarks: [],
@@ -10,7 +11,7 @@ const addBookmarkAsync = createAsyncThunk('bookmark/addBookmarkAsync', async (po
     try {
         const token = localStorage.getItem("jwtToken");
         const response = await axios.post(
-            `http://localhost:8080/api/bookmark/add-bookmark/${post_id}`,
+            `${BASE_URL}/bookmark/add-bookmark/${post_id}`,
             {},
             {
                 headers: {
@@ -43,7 +44,7 @@ const removeBookmarkAsync = createAsyncThunk('bookmark/removeBookmarkAsync', asy
         }
 
         const response = await axios.post(
-            `http://localhost:8080/api/bookmark/remove-bookmark/${post_id}`,
+            `${BASE_URL}/bookmark/remove-bookmark/${post_id}`,
             {},
             {
                 headers: {
@@ -76,7 +77,7 @@ const getBookmarkAsync = createAsyncThunk('bookmark/getBookmarkAsync', async (_,
         }
 
         const response = await axios.get(
-            `http://localhost:8080/api/bookmark/get-bookmark`,
+            `${BASE_URL}/bookmark/get-bookmark`,
             {
                 headers: {
                     'Content-Type': 'application/json',

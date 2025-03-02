@@ -6,6 +6,7 @@ import { useDispatch } from 'react-redux';
 import { updateUserAsync } from '../store/userSlice';
 import CancelButton from './CancelButton';
 import SaveButton from './SaveButton';
+import { IMAGE_URL } from '../store/constants';
 
 const EditProfileModal = ({ userData, onClose }) => {
     const [formData, setFormData] = useState({
@@ -51,7 +52,7 @@ const EditProfileModal = ({ userData, onClose }) => {
                             onClick={() => setIsProfilePicModalOpen(true)}
                         >
                             <img
-                                src={`http://localhost:8080${userData.profilePic}`}
+                                src={`${IMAGE_URL}${userData.profilePic}`}
                                 alt="Profile"
                                 className="w-full h-full object-cover"
                             />

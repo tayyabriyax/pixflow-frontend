@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
+import { BASE_URL } from './constants';
 
 const initialState = {
     loadData: false,
@@ -15,7 +16,7 @@ const getFollowersAsync = createAsyncThunk('follow/getFollowersAsync', async (_,
         }
 
         const response = await axios.get(
-            `http://localhost:8080/api/follow/followers`,
+            `${BASE_URL}/follow/followers`,
             {
                 headers: {
                     'Content-Type': 'application/json',
@@ -48,7 +49,7 @@ const getFollowingAsync = createAsyncThunk('follow/getFollowingAsync', async (_,
         }
 
         const response = await axios.get(
-            `http://localhost:8080/api/follow/following`,
+            `${BASE_URL}/follow/following`,
             {
                 headers: {
                     'Content-Type': 'application/json',

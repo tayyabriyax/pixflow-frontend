@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
+import { BASE_URL } from './constants';
 
 const initialState = {
     loadData: false,
@@ -14,7 +15,7 @@ const getLikesAsync = createAsyncThunk('likes/getLikesAsync', async (post_id, { 
         }
 
         const response = await axios.get(
-            `http://localhost:8080/api/like/like-count/${post_id}`,
+            `${BASE_URL}/like/like-count/${post_id}`,
             {
                 headers: {
                     'Content-Type': 'application/json',
@@ -47,7 +48,7 @@ const likePostAsync = createAsyncThunk('likes/likePostAsync', async (post_id, { 
         }
 
         const response = await axios.post(
-            `http://localhost:8080/api/like/like-post/${post_id}`,
+            `${BASE_URL}/like/like-post/${post_id}`,
             {},
             {
                 headers: {
@@ -80,7 +81,7 @@ const unLikePostAsync = createAsyncThunk('likes/unLikePostAsync', async (post_id
         }
 
         const response = await axios.post(
-            `http://localhost:8080/api/like/unlike-post/${post_id}`,
+            `${BASE_URL}/like/unlike-post/${post_id}`,
             {},
             {
                 headers: {

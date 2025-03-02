@@ -1,10 +1,11 @@
 import React from 'react'
+import { IMAGE_URL } from '../store/constants'
 
 const PostAuther = ({profilePic, userName}) => {
     return (
         <div className="flex items-center mb-4">
             <img
-                src={`http://localhost:8080${profilePic}`}
+                src={`${IMAGE_URL}${profilePic}`}
                 alt="https://via.placeholder.com/40"
                 className="w-10 h-10 rounded-full object-cover"
             />

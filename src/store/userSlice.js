@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
+import { BASE_URL } from './constants';
 
 const initialState = {
     userDetails: [],
@@ -14,7 +15,7 @@ const getUserDetailsAsync = createAsyncThunk('user/getUserDetailsAsync', async (
         }
 
         const response = await axios.get(
-            `http://localhost:8080/api/user/user-details`,
+            `${BASE_URL}/user/user-details`,
             {
                 headers: {
                     'Content-Type': 'application/json',
@@ -42,7 +43,7 @@ const updateUserAsync = createAsyncThunk('user/updateUser', async (userCredentia
     try {
         const token = localStorage.getItem("jwtToken");
         const response = await axios.put(
-            'http://localhost:8080/api/user/update-user',
+            `${BASE_URL}/user/update-user`,
             userCredentials,
             {
                 headers: {
@@ -78,7 +79,7 @@ const updateProfilePicAsync = createAsyncThunk('user/updateProfilePic', async (p
         formData.append("profilePic", profilePic);
 
         const response = await axios.put(
-            `http://localhost:8080/api/user/update-profile-pic`,
+            `${BASE_URL}/user/update-profile-pic`,
             formData,
             {
                 headers: {

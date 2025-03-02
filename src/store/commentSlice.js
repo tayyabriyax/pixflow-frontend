@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
+import { BASE_URL } from './constants';
 
 const initialState = {
     comments: [],
@@ -14,7 +15,7 @@ const getCommentsAsync = createAsyncThunk('getCommentsAsync', async (post_id, { 
         }
 
         const response = await axios.get(
-            `http://localhost:8080/api/comment/get-comment/${post_id}`,
+            `${BASE_URL}/comment/get-comment/${post_id}`,
             {
                 headers: {
                     'Content-Type': 'application/json',
@@ -46,7 +47,7 @@ const createCommentsAsync = createAsyncThunk('createCommentsAsync', async ({post
         }
 
         const response = await axios.post(
-            `http://localhost:8080/api/comment/create-comment/${post_id}`,
+            `${BASE_URL}/comment/create-comment/${post_id}`,
             comment,
             {
                 headers: {

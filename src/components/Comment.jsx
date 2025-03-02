@@ -1,10 +1,11 @@
 import React from 'react'
+import { IMAGE_URL } from '../store/constants'
 
 const Comment = ({ profilePic, userName, content }) => {
     return (
         <div className="flex items-center mb-4">
             <img
-                src={`http://localhost:8080${profilePic}`}
+                src={`${IMAGE_URL}${profilePic}`}
                 alt="https://via.placeholder.com/40"
                 className="w-6 h-6 rounded-full object-cover"
             />

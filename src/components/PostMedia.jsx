@@ -1,9 +1,10 @@
 import React from 'react'
+import { IMAGE_URL } from '../store/constants'
 
 const PostMedia = ({url}) => {
     return (
         <img
-            src={`http://localhost:8080${url}`}
+            src={`${IMAGE_URL}${url}`}
             sizes="(max-width: 640px) 640px, 
                 (max-width: 1024px) 1024px, 
                 1600px"

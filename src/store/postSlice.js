@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
+import { BASE_URL } from './constants';
 
 const initialState = {
     posts: [],
@@ -13,7 +14,7 @@ const getPostsAsync = createAsyncThunk('post/getPostsAsync', async (_, { rejectW
         }
 
         const response = await axios.get(
-            'http://localhost:8080/api/post/get-post',
+            `${BASE_URL}/post/get-post`,
             {
                 headers: {
                     'Content-Type': 'application/json',
@@ -49,7 +50,7 @@ const createPostAsync = createAsyncThunk('post/createPostAsync', async ({ post, 
         formData.append("post", post);
 
         const response = await axios.post(
-            `http://localhost:8080/api/post/create-post`,
+            `${BASE_URL}/post/create-post`,
             formData,
             {
                 headers: {

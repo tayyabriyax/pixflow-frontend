@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getFollowersAsync, getFollowingAsync } from '../store/followSlice';
 import FollowListModal from './FollowListModal';
 import EditProfileModal from './EditProfileModal';
+import { IMAGE_URL } from '../store/constants';
 
 const ProfileHeader = ({ user }) => {
 
@@ -31,7 +32,7 @@ const ProfileHeader = ({ user }) => {
         <div className="bg-white shadow-md p-6 flex items-center justify-center space-x-10 cursor-auto py-20">
             <div className="w-32 h-32 rounded-full overflow-hidden border border-gray-300">
                 <img
-                    src={`http://localhost:8080${user.profilePic}`}
+                    src={`${IMAGE_URL}${user.profilePic}`}
                     alt="https://via.placeholder.com/150"
                     className="w-full h-full object-cover"
                 />
