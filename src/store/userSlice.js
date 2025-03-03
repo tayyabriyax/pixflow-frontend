@@ -48,8 +48,9 @@ const getSearchedUsersAsync = createAsyncThunk('user/getSearchedUsersAsync', asy
         }
 
         const response = await axios.get(
-            `${BASE_URL}/user/search-user/${keyword}`,
+            `${BASE_URL}/user/search-user`,
             {
+                params: { keyword },
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${token}`,

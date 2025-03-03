@@ -38,11 +38,6 @@ const Home = () => {
                     ))
                 }
             </div>
-
-            <div className="hidden lg:block w-1/4 p-4">
-                <h2 className="text-lg font-semibold text-gray-700">More Features</h2>
-                <p className="text-sm text-gray-500">Placeholder for additional features...</p>
-            </div>
         </div>
     );
 };

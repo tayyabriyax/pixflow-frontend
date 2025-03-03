@@ -24,7 +24,7 @@ const Search = () => {
     return (
         <div className="flex min-h-screen bg-white cursor-auto">
 
-            <div className="w-96 mx-auto p-4">
+            <div className="w-96 mx-auto py-8">
 
                 <div className="flex items-center bg-gray-100 rounded-lg px-4 py-2 w-full">
                     <FiSearch className="text-gray-500" />
@@ -40,15 +40,25 @@ const Search = () => {
                 <div className="mt-4">
                     {users.length > 0 ? (
                         users.map((user, index) => (
-                            <div key={index} className="flex items-center gap-3 p-2 hover:bg-gray-100 rounded-lg cursor-pointer">
-                                <img
-                                    src={`${IMAGE_URL}${user.profilePic}`}
-                                    alt={user.userName}
-                                    className="w-10 h-10 rounded-full object-cover" />
-                                <div>
-                                    <p className="font-semibold">{user.userName}</p>
-                                    <p className="text-gray-500 text-sm">{user.email}</p>
+                            <div key={index} className="flex items-center justify-between p-2 
+                                                hover:bg-gray-100 rounded-lg cursor-pointer">
+                                <div className='flex gap-3'>
+                                    <img
+                                        src={`${IMAGE_URL}${user.profilePic}`}
+                                        alt={user.userName}
+                                        className="w-10 h-10 rounded-full object-cover" />
+
+                                    <div>
+                                        <p className="font-semibold">{user.userName}</p>
+                                        <p className="text-gray-500 text-sm">{user.email}</p>
+                                    </div>
                                 </div>
+
+                                <button
+                                    className="ml-2 px-4 py-2 bg-white border hover:text-white text-sm rounded hover:bg-purple-600"
+                                >
+                                    Follow
+                                </button>
                             </div>
                         ))
                     ) : searchQuery ? (
