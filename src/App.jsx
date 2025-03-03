@@ -8,6 +8,7 @@ import {
   Create,
   Home,
   Profile,
+  Search,
   Settings,
   SignIn,
   SignUp
@@ -27,6 +28,9 @@ const App = () => {
             </PrivateRoute>} />
           <Route path="/create" element={<PrivateRoute>
             <Create />
+          </PrivateRoute>} />
+          <Route path="/search" element={<PrivateRoute>
+            <Search />
           </PrivateRoute>} />
           <Route path="/profile" element={<PrivateRoute>
             <Profile />

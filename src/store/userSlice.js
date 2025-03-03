@@ -4,6 +4,7 @@ import { BASE_URL } from './constants';
 
 const initialState = {
     userDetails: [],
+    searchedUsers: [],
     loadData: false
 }
 
@@ -16,6 +17,38 @@ const getUserDetailsAsync = createAsyncThunk('user/getUserDetailsAsync', async (
 
         const response = await axios.get(
             `${BASE_URL}/user/user-details`,
+            {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`,
+                },
+            }
+        );
+        return response.data;
+    } catch (error) {
+        if (error.response) {
+            console.error(`HTTP error! Status: ${error.response.status}`);
+            console.error('Response data:', error.response.data);
+            return rejectWithValue(error.response.data);
+        } else if (error.request) {
+            console.error('No response received:', error.request);
+            return rejectWithValue('No response received from the server.');
+        } else {
+            console.error('Error:', error.message);
+            return rejectWithValue(error.message);
+        }
+    }
+});
+
+const getSearchedUsersAsync = createAsyncThunk('user/getSearchedUsersAsync', async (keyword, { rejectWithValue }) => {
+    try {
+        const token = localStorage.getItem("jwtToken");
+        if (!token) {
+            throw new Error("Authorization token is missing.");
+        }
+
+        const response = await axios.get(
+            `${BASE_URL}/user/search-user/${keyword}`,
             {
                 headers: {
                     'Content-Type': 'application/json',
@@ -121,8 +154,11 @@ const userSlice = createSlice({
             .addCase(updateProfilePicAsync.fulfilled, (state) => {
                 state.loadData = !state.loadData
             })
+            .addCase(getSearchedUsersAsync.fulfilled, (state, action) => {
+                state.searchedUsers = action.payload
+            })
     }
 });
 
 export default userSlice.reducer;
-export { getUserDetailsAsync, updateUserAsync, updateProfilePicAsync }
+export { getUserDetailsAsync, updateUserAsync, updateProfilePicAsync, getSearchedUsersAsync }

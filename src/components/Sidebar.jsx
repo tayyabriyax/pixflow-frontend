@@ -3,7 +3,7 @@ import { FaHome, FaUser, FaCog, FaSignOutAlt } from 'react-icons/fa';
 import SidebarLink from './SidebarLink';
 import { useDispatch } from 'react-redux';
 import { logout } from '../store/authSlice';
-import { MdOutlinePostAdd } from 'react-icons/md';
+import { MdOutlinePostAdd, MdSearch } from 'react-icons/md';
 
 const Sidebar = ({ theme }) => {
 
@@ -34,6 +34,13 @@ const Sidebar = ({ theme }) => {
                                 label={"Create"}
                                 pathname={"/create"}
                                 icon={<MdOutlinePostAdd size={20} className='mr-2' />} />
+                        </li>
+
+                        <li>
+                            <SidebarLink
+                                label={"Search"}
+                                pathname={"/search"}
+                                icon={<MdSearch size={20} className='mr-2' />} />
                         </li>
 
                         <li>

@@ -4,6 +4,7 @@ import Home from "./Home";
 import Profile from "./Profile";
 import Settings from "./Settings";
 import Create from "./Create"
+import Search from "./Search";
 
 export {
     SignIn,
@@ -11,5 +12,6 @@ export {
     Home,
     Profile,
     Settings,
-    Create
+    Create,
+    Search
 }
