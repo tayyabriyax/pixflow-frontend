@@ -3,12 +3,15 @@ import { FiSearch } from "react-icons/fi";
 import { getSearchedUsersAsync } from '../store/userSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { IMAGE_URL } from '../store/constants';
+import { followUserAsync, getFollowingAsync, unfollowUserAsync } from '../store/followSlice';
 
 const Search = () => {
 
     const [searchQuery, setSearchQuery] = useState("");
 
     const users = useSelector(state => state.user.searchedUsers);
+    const following = useSelector((state) => state.follow.following);
+    const loadData = useSelector((state) => state.follow.loadData);
 
     const dispatch = useDispatch();
 
@@ -18,8 +21,19 @@ const Search = () => {
 
     useEffect(() => {
         dispatch(getSearchedUsersAsync(searchQuery));
-    }, [searchQuery])
+    }, [searchQuery]);
 
+    useEffect(() => {
+        dispatch(getFollowingAsync());
+    }, [loadData]);
+
+    const handleClickOnUnfollow = (id) => {
+        dispatch(unfollowUserAsync(id));
+    }
+
+    const handleClickOnFollow = (id) => {
+        dispatch(followUserAsync(id));
+    }
 
     return (
         <div className="flex min-h-screen bg-white cursor-auto">
@@ -54,11 +68,24 @@ const Search = () => {
                                     </div>
                                 </div>
 
-                                <button
-                                    className="ml-2 px-4 py-2 bg-white border hover:text-white text-sm rounded hover:bg-purple-600"
-                                >
-                                    Follow
-                                </button>
+                                {
+                                    following.some(following => following.user.userName === user.userName) ?
+                                        <button
+                                            onClick={() => handleClickOnUnfollow(user.id)}
+                                            className="ml-2 px-4 py-2 bg-purple-600 border text-white
+                                                border-purple-600 text-sm rounded hover:bg-purple-600"
+                                        >
+                                            Unfollow
+                                        </button>
+                                        :
+                                        <button
+                                            onClick={() => handleClickOnFollow(user.id)}
+                                            className="ml-2 px-4 py-2 bg-white border hover:text-white text-sm rounded 
+                                                hover:bg-purple-600"
+                                        >
+                                            Follow
+                                        </button>
+                                }
                             </div>
                         ))
                     ) : searchQuery ? (
