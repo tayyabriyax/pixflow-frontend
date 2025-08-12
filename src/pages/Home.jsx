@@ -24,7 +24,8 @@ const Home = () => {
                         <Post key={post.id}>
                             <PostAuther
                                 profilePic={post.auther.profilePic}
-                                userName={post.auther.userName} />
+                                userName={post.auther.userName}
+                                createdAt={post.createdAt} />
 
                             <PostMedia
                                 url={post.url} />

@@ -49,7 +49,8 @@ const PostModalComment = ({ post }) => {
                         <Comment
                             userName={comment.userId.userName}
                             profilePic={comment.userId.profilePic}
-                            content={comment.content} />
+                            content={comment.content}
+                            createdAt={comment.createdAt} />
                     </React.Fragment>
                 ))}
             </div>

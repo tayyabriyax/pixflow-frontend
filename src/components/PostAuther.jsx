@@ -1,7 +1,8 @@
 import React from 'react'
 import { IMAGE_URL } from '../store/constants'
+import { timeAgo } from '../store/actions'
 
-const PostAuther = ({profilePic, userName}) => {
+const PostAuther = ({ profilePic, userName, createdAt }) => {
     return (
         <div className="flex items-center mb-4">
             <img
@@ -11,7 +12,7 @@ const PostAuther = ({profilePic, userName}) => {
             />
             <div className="ml-3">
                 <h4 className="text-sm font-medium text-gray-800">{userName}</h4>
-                <p className="text-xs text-gray-500">2 hours ago</p>
+                <p className="text-xs text-gray-500">{timeAgo(new Date(createdAt))}</p>
             </div>
         </div>
     )

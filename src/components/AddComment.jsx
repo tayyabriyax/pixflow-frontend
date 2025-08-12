@@ -33,7 +33,7 @@ const AddComment = ({ post }) => {
                     onChange={handleChangeInComment}
                     placeholder="Add a comment..."
                     className="flex-grow p-2 text-sm border border-gray-300 rounded 
-                            focus:outline-none focus:ring focus:ring-blue-200"
+                            focus:outline-none focus:ring focus:ring-purple-200"
                 />
                 <button
                     type='submit'

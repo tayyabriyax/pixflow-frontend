@@ -43,7 +43,7 @@ const Profile = () => {
                                 title="Share Photos"
                                 description="When you share photos, they will appear on your profile."
                                 actionText="Share your first photo"
-                                onActionClick={() => console.log("Redirect to create post page")}
+                                redirectTo={"/create"}
                             />
                         )}
                     </>
@@ -58,7 +58,7 @@ const Profile = () => {
                                 title="No Bookmarks Yet"
                                 description="Save posts you like to find them later."
                                 actionText="Explore Posts"
-                                onActionClick={() => console.log("Redirect to explore page")}
+                                redirectTo={"/home"}
                             />
                         )}
                     </>
